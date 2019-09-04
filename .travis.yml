@@ -32,7 +32,7 @@ deploy:
     wait-until-deployed: true
     local_dir: deploy
     on:
-      repo: snack-news/Snack-admin #Github
+      repo: Delf-Lee/Snack-admin #Github
       branch: master
 
   - provider: codedeploy
@@ -46,5 +46,5 @@ deploy:
     region: ap-northeast-2
     wait-until-deployed: true
     on:
-      repo: snack-news/Snack-admin #Github
+      repo: Delf-Lee/Snack-admin #Github
       branch: master
