@@ -11,84 +11,36 @@
           <th scope="col">생성일</th>
           <th scope="col">수정일</th>
           <th scope="col">업로드 예약일</th>
-          <th scope="col"></th>
+          <th scope="col">수정/삭제</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
+        <tr v-for="item in news" :key="item.key">
+          <td>{{ item.key }}</td>
           <td>TOP</td>
           <td>카테고리</td>
           <td>토픽(회사)</td>
-          <td>제목</td>
-          <td>생성일</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.createdDate }}</td>
           <td>수정일</td>
           <td>업로드 예약일</td>
           <td>
             <button type="button">삭제</button>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>TOP</td>
-          <td>카테고리</td>
-          <td>토픽(회사)</td>
-          <td>제목</td>
-          <td>생성일</td>
-          <td>수정일</td>
-          <td>업로드 예약일</td>
-          <td>
-            <button type="button">삭제</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>TOP</td>
-          <td>카테고리</td>
-          <td>토픽(회사)</td>
-          <td>제목</td>
-          <td>생성일</td>
-          <td>수정일</td>
-          <td>업로드 예약일</td>
-          <td>
-            <button type="button">삭제</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>TOP</td>
-          <td>카테고리</td>
-          <td>토픽(회사)</td>
-          <td>제목</td>
-          <td>생성일</td>
-          <td>수정일</td>
-          <td>업로드 예약일</td>
-          <td>
-            <button type="button">삭제</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>TOP</td>
-          <td>카테고리</td>
-          <td>토픽(회사)</td>
-          <td>제목</td>
-          <td>생성일</td>
-          <td>수정일</td>
-          <td>업로드 예약일</td>
-          <td>
-            <button type="button">삭제</button>
-          </td>
+        <tr v-if="news.length === 0">
+          <td colspan="9" class="is-empty">생성된 뉴스가 없습니다.</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue, Prop } from 'vue-property-decorator';
 
   @Component
   export default class ArticleListTable extends Vue {
+    @Prop() news!: INews[];
     constructor () {
       super();
     }
@@ -116,6 +68,11 @@
           color: #0f0f0f;
           button {
             color: #f10202;
+          }
+          &.is-empty {
+            padding: 40px 0;
+            font-size: 16px;
+            text-align: center;
           }
         }
       }

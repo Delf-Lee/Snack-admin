@@ -1,35 +1,33 @@
 <template>
-  <div>
-    <div class="editor" id="codex-editor">
-    </div>
-    <button type="button" @click="onSaveHandler">저장</button>
+  <div class="editor" id="codex-editor">
   </div>
-
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator';
-  import EditorJS from '@editorjs/editorjs';
-  import List from '@editorjs/list';
-  import Header from '@editorjs/header';
-  import ImageTool from '@editorjs/image';
-  import Embed from '@editorjs/embed';
+  import { Component, Prop, Vue, PropSync } from "vue-property-decorator";
+  import EditorJS from "@editorjs/editorjs";
+  import List from "@editorjs/list";
+  import Header from "@editorjs/header";
+  import ImageTool from "@editorjs/image";
+  import Embed from "@editorjs/embed";
   import { INullable } from "@/@types/utility";
 
   @Component({
-    name: 'Editor',
+    name: "Editor"
   })
   export default class Editor extends Vue {
-    test: INullable<EditorJS>;
+    editorRef: INullable<EditorJS>;
 
     constructor() {
       super();
-      this.test = null;
+      this.editorRef = null;
     }
 
     created() {
-      this.test = new EditorJS({
-        holderId: 'codex-editor',
+      const that = this;
+      this.editorRef = new EditorJS({
+        holderId: "codex-editor",
+        minHeight: 292,
         tools: {
           header: Header,
           embed: {
@@ -37,31 +35,35 @@
             inlineToolbar: false,
             config: {
               services: {
-                youtube: true,
+                youtube: true
               }
             }
           },
           list: {
             class: List,
-            inlineToolbar: true,
+            inlineToolbar: true
           },
           image: {
             class: ImageTool
           }
         },
+        onChange (): void {
+          that.onChangeHandler();
+        }
       });
     }
 
     @Prop() private msg!: string;
 
-    onSaveHandler(): void {
-      if (this.test) {
-        this.test.save()
-          .then(res => {
-            alert("콘솔창 열어보면 JSON 형태로 볼수 있삼");
-            console.log(res);
-            this.$emit('onSaveHandler', JSON.stringify(res));
-          })
+    async onChangeHandler () {
+      if (!this.editorRef) {
+        return;
+      }
+      try {
+        const { blocks } = await this.editorRef.save();
+        this.$emit("input", blocks);
+      } catch (e) {
+        console.log(e);
       }
     }
   }
@@ -71,5 +73,14 @@
   .editor {
     text-align: left;
     height: 100%;
+    border: solid 1px #0f0f0f;
+    /deep/ .ce-block__content {
+      max-width: unset;
+      margin: 0;
+      padding: 12px 18px;
+    }
+    /deep/ .ce-toolbar__plus {
+      left: -66px;
+    }
   }
 </style>

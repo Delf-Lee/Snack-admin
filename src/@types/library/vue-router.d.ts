@@ -1,4 +1,7 @@
-import Vue from "vue";
-import { RawLocation } from "vue-router";
+import { NavigationGuard } from 'vue-router';
 
-export type Next<V extends Vue = Vue> = (to?: RawLocation | false | ((vm: V) => any) | void) => void;
+/**
+ * @summary about Next type
+ * @reference https://github.com/vuejs/vue-router/issues/2758
+ */
+type Next = Parameters<NavigationGuard>[2];
