@@ -15,7 +15,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/admin',
       name: 'home',
       components: {
         header: HeaderComponent,
@@ -23,21 +23,21 @@ export default new Router({
       }
     },
     {
-      path: '/signin',
+      path: '/admin/signin',
       name: 'Signin',
       components: {
         default: Signin
       }
     },
     {
-      path: '/articles',
+      path: '/admin/articles',
       name: 'ArticleList',
       components: {
         default: ArticleList
       }
     },
     {
-      path: '/new-article',
+      path: '/admin/new-article',
       name: 'ArticleForm',
       components: {
         default: ArticleForm
