@@ -9,21 +9,21 @@ if [[ $(sudo netstat -ntlp | grep ${SNACKADMIN1_PORT} | wc -l) == 1 ]]
 then
     echo "> 사용중인 PROFILE SNACKADMIN1"
     echo "> 사용가능 PROFILE SNACKADMIN2"
-    IDLE_PROFILE=SNACKADMIN2
-    RUN_PROFILE=SNACKADMIN1
+    IDLE_PROFILE=snackadmin2
+    RUN_PROFILE=snackadmin1
     IDLE_PORT=${SNACKADMIN2_PORT}
-    ORIGIN_PROFILE=SNACKADMIN1
+    ORIGIN_PROFILE=snackadmin1
 elif [[ $(sudo netstat -ntlp | grep ${SNACKADMIN2_PORT} | wc -l) == 1 ]]
 then
     echo "> 사용중인 PROFILE SNACKADMIN2"
     echo "> 사용가능 PROFILE SNACKADMIN1"
-    IDLE_PROFILE=SNACKADMIN1
-    RUN_PROFILE=SNACKADMIN2
+    IDLE_PROFILE=snackadmin1
+    RUN_PROFILE=snackadmin2
     IDLE_PORT=${SNACKADMIN1_PORT}
 else
   echo "> 일치하는 Profile이 없습니다."
   echo "> set1을 할당합니다. IDLE_PROFILE: SNACKADMIN1"
-  IDLE_PROFILE=SNACKADMIN1
+  IDLE_PROFILE=snackadmin1
   IDLE_PORT=${SNACKADMIN1_PORT}
 fi
 
