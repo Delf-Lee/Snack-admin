@@ -21,7 +21,8 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: snack-news-deploy
+    bucket: test-snack-bucket
+    region: ap-northeast-2 # seoul
     skip_cleanup: true
     acl: public_read
     wait-until-deployed: true
@@ -33,7 +34,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: snack-news-deploy
+    bucket: test-snack-bucket
     key: snack-news-admin.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
     application: snack-news-deploy # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
