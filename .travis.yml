@@ -19,8 +19,8 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAIXV4QXQDD7IIFR4A
-    secret_access_key: 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
+    access_key_id: AKIAJFSKKQPZQGGJIOTA
+    secret_access_key: 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
     bucket: snack-bucket-test
     region: ap-northeast-2 # seoul
     skip_cleanup: true
