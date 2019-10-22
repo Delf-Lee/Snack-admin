@@ -19,8 +19,8 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAQC4ZKBFO4X46MLZZZrm76EeNy4TfwpLRlKWkttZMeqRWMC71rbyRZ7wZ
-    secret_access_key: (|&I9fvzLQ0^ 
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     bucket: snack-bucket-test
     region: ap-northeast-2 # seoul
     skip_cleanup: true
@@ -32,8 +32,8 @@ deploy:
       branch: master
 
   - provider: codedeploy
-    access_key_id: AKIAQC4ZKBFO4X46MLZZZrm76EeNy4TfwpLRlKWkttZMeqRWMC71rbyRZ7wZ
-    secret_access_key: (|&I9fvzLQ0^
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     bucket: snack-bucket-test
     key: snack-news-admin.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
